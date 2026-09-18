@@ -1,4 +1,3 @@
-```python
 import pandas
 
 df = pandas.read_csv("student_exam_performance.csv", usecols=['exam_score','sleep_hours','study_hours_per_day','attendance_percentage','pass_status'])
