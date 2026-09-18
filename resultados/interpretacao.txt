@@ -1,0 +1,17 @@
+Análise de 90,137 registros completos.
+
+Sono (horas) e nota: Pearson = 0.169; Spearman = 0.162.
+
+Estudo (horas/dia) e nota: Pearson = 0.363; Spearman = 0.341.
+
+Frequência (%) e nota: Pearson = 0.169; Spearman = 0.161.
+
+Entre os fatores selecionados, estudo (horas/dia) apresenta a maior associação linear em módulo com a nota nesta base.
+
+Os coeficientes são associações bivariadas: não controlam outros fatores e não demonstram causalidade nem importância independente. Valores próximos de zero não descartam relações não lineares.
+
+O Z-score permite comparar mediana, assimetria e extremos das distribuições de sono, estudo e frequência, apesar das unidades diferentes. Média zero e desvio padrão um são resultados da transformação, não descobertas sobre igualdade dos hábitos. Padronização não torna os dados normalmente distribuídos.
+
+Pearson e Spearman não exigem Z-score e não mudam com essa transformação linear de escala positiva. O boxplot padronizado não mede efeito sobre a nota.
+
+A exclusão de registros incompletos pode introduzir viés. As conclusões descrevem apenas a base utilizada; não estabelecem uma intervenção eficaz.

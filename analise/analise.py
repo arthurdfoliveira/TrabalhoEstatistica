@@ -1,6 +1,17 @@
-import pandas
+import argparse
+from pathlib import Path
 
-df = pandas.read_csv("student_exam_performance.csv", usecols=['exam_score','sleep_hours','study_hours_per_day','attendance_percentage','pass_status'])
+import pandas
+import matplotlib.pyplot as plt
+
+from exploracao import analisar, interpretar, gerar_graficos, exportar_tabelas
+
+parser = argparse.ArgumentParser(description="Análise exploratória do Grupo 6")
+parser.add_argument("--csv", type=Path, default=Path(__file__).resolve().parents[1] / "student_exam_performance.csv")
+parser.add_argument("--saida", type=Path, default=Path(__file__).resolve().parents[1] / "resultados")
+args = parser.parse_args()
+
+df = pandas.read_csv(args.csv, usecols=['exam_score','sleep_hours','study_hours_per_day','attendance_percentage','pass_status'])
 
 # valores nulos
 quantitative_lines_NULL = df.isnull().any(axis=1).sum()
@@ -102,3 +113,14 @@ print("Q3 attendance_percentage:", q3_attendance_percentage)
 print("amplitude attendance_percentage:", amplitude_attendance_percentage)
 print("variância attendance_percentage:", variancia_attendance_percentage)
 print("desvio padrão attendance_percentage:", desvio_padrao_attendance_percentage)
+
+# Correlação, padronização e gráficos usam a mesma base tratada das métricas.
+resultados = analisar(df)
+print("\nAssociações com a nota:\n", resultados["associacoes"].round(4))
+print("\nVerificação do Z-score:\n", resultados["verificacao"])
+print("\n" + interpretar(resultados))
+figuras = gerar_graficos(df, resultados, args.saida)
+exportar_tabelas(resultados, args.saida)
+for figura in figuras.values():
+    plt.close(figura)
+print(f"\nGráficos e tabelas salvos em: {args.saida.resolve()}")
